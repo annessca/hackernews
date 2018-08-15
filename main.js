@@ -12,7 +12,7 @@ const rule = document.createElement('hr');
 // Create an unordered list tag in the section tag
 const bullets = document.createElement('ul');
 
-let mySub = 'Realtime Everything News powered by <a href="newsapi.org" target="_blank">News API</a>'
+let mySub = 'Realtime Everything News powered by <a href="https://newsapi.org" target="_blank">News API</a>'
 
 // Values for header population
 siteTitle.textContent = 'Hacker News';
