@@ -1,4 +1,5 @@
 let pageNumber = 2
+const accessright = '8edde0574a9e4f15a15452b9fc5e0936';
 // Get the entry point to the website
 const header = document.querySelector('header');
 const section = document.querySelector('section');
@@ -11,9 +12,11 @@ const rule = document.createElement('hr');
 // Create an unordered list tag in the section tag
 const bullets = document.createElement('ul');
 
+let mySub = 'Realtime Everything News powered by <a href="newsapi.org" target="_blank">News API</a>'
+
 // Values for header population
 siteTitle.textContent = 'Hacker News';
-siteDescription.textContent = 'Realtime Everything News powered by News API';
+siteDescription.insertAdjacentHTML('beforeend', mySub);
 
 // Append elements to the header
 header.appendChild(siteTitle);
@@ -25,18 +28,24 @@ section.appendChild(bullets);
 
 
 const apiRequest = new XMLHttpRequest();
-apiRequest.open('GET', 'https://newsapi.org/v2/everything?domains=wsj.com,nytimes.com&apiKey=8edde0574a9e4f15a15452b9fc5e0936&pageSize=100&page=1', true);
+apiRequest.open('GET', 'https://newsapi.org/v2/everything?domains=wsj.com,nytimes.com&apiKey='+accessright+'&pageSize=100&page=1', true);
 apiRequest.onload = function() {
 	if (apiRequest.status >= 200 && apiRequest.status < 400) {
 		const apiResponse = JSON.parse(apiRequest.response);
 		displayResult(apiResponse);
 	} else {
-		console.log("We connected to the server but encountered an error")
+		const serverError = window.open('servererror.html','Error','height=400,width=200');
+	    if (window.focus) {
+		    serverError.focus()
+	    }
 	}
 };
 
 apiRequest.onerror = function(){
-	console.log("Connection Error");
+	const connectionError = window.open('connectionerror.html','Error','height=400,width=200');
+	if (window.focus) {
+		connectionError.focus()
+	}
 }
 apiRequest.send();
 
@@ -51,18 +60,23 @@ function yHandler(){
 	if(y >= contentHeight){
 		// Ajax call to get more dynamic data goes here
 
-		apiRequest.open('GET', 'https://newsapi.org/v2/everything?domains=wsj.com,nytimes.com&apiKey=8edde0574a9e4f15a15452b9fc5e0936&pageSize=100&page='+ pageNumber, true);
+		apiRequest.open('GET', 'https://newsapi.org/v2/everything?domains=wsj.com,nytimes.com&apiKey='+accessright+'&pageSize=100&page='+ pageNumber, true);
         apiRequest.onload = function() {
 	        if (apiRequest.status >= 200 && apiRequest.status < 400) {
 		        const apiResponse = JSON.parse(apiRequest.response);
 		        displayResult(apiResponse);
-		        section.appendChild('loading ...');
 	        } else {
-		        console.log("We connected to the server but encountered an error")
+	        	const nextServerError = window.open('servererror.html', 'errorpage', 'height=400,width=200')
+        	    if (window.focus) {
+        		    nextServerError.focus()
+        	    }
 	        }
         };
         apiRequest.onerror = function(){
-	        console.log("Connection Error");
+        	const nextConnectionError = window.open('connectionerror.html', 'errorpage', 'height=400,width=200')
+        	if (window.focus) {
+        		nextConnectionError.focus()
+        	}
         }
     apiRequest.send();
     pageNumber++;
