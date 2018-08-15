@@ -1,4 +1,51 @@
+body {
+	width: 80%;
+	margin: 0 auto;
+	border-style: double;
+	border-width: 1px;
+	border-color: lightgrey;
+}
+
+section {
+	padding-right: 5px
+}
+
 header, footer {
 	text-align: center;
-	
+	font-size: 20px;
+}
+
+h2 {
+	font-weight: bold;
+	font-family: Verdana;
+	color: darkblue;
+}
+
+p {
+	font-family: Goergia;
+	text-transform: full-width;
+	letter-spacing: 2px;
+	color: Tomato;
+}
+
+ a {
+ 	text-decoration: none;
+ }
+
+ article {
+ 	word-spacing: 4px;
+ 	color: DodgerBlue;
+ }
+
+h3 {
+	font-family: Arial;
+	color: darkblue;
+}
+
+ul {
+	list-style-type: circle;
+}
+
+samp {
+	color: teal;
 }
